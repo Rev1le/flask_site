@@ -1,0 +1,91 @@
+body{
+    margin: 0px;
+    background-color: #36393f;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #fff;
+}
+header{
+    background-color: #2d2f33;
+}
+p,ol,li {
+    margin: 0 auto;
+    max-width: 60%;
+    padding-top: 1.4em;
+    /* font-family: sans-serif; */
+    
+}
+table{
+    max-width: 4em;
+}
+li{
+    font-style:italic;
+    margin-left: 3.5%;
+    margin-top: 2px;
+    
+}
+h1, h3 {
+    padding-top: 1.5em;
+    /* font-family: sans-serif; */
+}
+h1 {
+    font-size: 32px;
+}
+table, td, tr{
+    border: 1px solid black;
+    
+}
+
+figcaption{
+    font-style:italic;
+}
+figure{
+    float: right;
+    margin: 20px;
+}
+button{
+    background-color: #5865f2;
+    border: none;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 15px;
+    transition: all 0.5s ease;
+    border-radius: 20px;
+}
+button:hover{
+    background-color: #707bf5;
+}
+button:focus{
+    outline: none;
+    background-color: #5865f2;
+}
+table {
+    margin: 0 auto;
+    max-width: 60%; 
+    border-color: #fff;
+    border-radius: 2px;
+}
+th, td {
+    border: 2px solid #fff;
+    
+}
+img{
+    padding-top: 20px;
+    margin: auto;
+    max-width: 700px;
+    max-height: 700px;
+    display: block;
+}
+.Back{
+    margin-top: 0em;
+    margin-bottom: 0em;
+    bottom:90px;
+    width:15%;
+    margin-left:2%;
+    padding:32px 12px 4px;
+}

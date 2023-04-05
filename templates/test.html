@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>		
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="true">
+    <meta name = "format-detection" content = "telephone=no">
+        
+    <title>RGROpros</title>
+    <style>
+        *{
+        box-sizing: border-box;
+    }
+    body{
+        font-family: 'Roboto', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+        overflow: auto;
+        margin: 0;
+        background-color: #36393f;
+        background-position: center;
+        background-size: cover;
+    }
+    h2{
+        padding: 16px;
+        text-align: center;
+        margin: 0;
+        
+    }
+    .quiz-box{
+        margin-top: 8%;
+        background-color: #40444b;
+        border-radius: 20px;
+        /* box-shadow: 0 0 10px 2px rgba(100, 100, 100, 0.1); */
+        width: 35%;
+        color: #fff;
+        /* overflow: hidden; */
+    }
+    .quiz-header{
+        padding: 52px;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+    }
+    ul li{
+        font-size: 20px;
+        margin: 15px 0;
+    }
+    ul li label{
+        cursor: pointer;
+    }
+    
+    .bottomButoons{       
+        margin-top: 2%;
+        /* top: 75%;
+        width: 600px;
+        margin-top: 0;
+        background: white;
+        padding: 10px;
+        position: relative; */
+    }
+    
+    .btn {
+        display: flex;
+    }
+    
+    .btn button:not(:last-child) {
+        margin-right: 2%;
+    }
+    #diz{
+        margin-top: 2%;
+        display: flex;
+        margin-right: 2%;
+        
+        align-items: center;
+        justify-content: center;
+    }
+    #diz button:not(:last-child) {
+        margin-right: 2%;
+    }
+    
+     /* #img{
+        position: absolute;
+        top: 91%;
+        margin:0;
+    }  */
+    
+    button{
+        background-color: #5865f2;
+        border: none;
+        display: block;
+        width: 100%;
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        padding: 15px;
+        transition: all 0.5s ease;
+        border-radius: 20px;
+    }
+    button:hover{
+        background-color: #707bf5;
+    }
+    button:focus{
+        outline: none;
+        background-color: #5865f2;
+    }
+    </style>
+	<!-- Styles -->
+    <!-- Styles -->
+        <!-- <link id="stylePage" rel="stylesheet"  href="styles.css" /> -->
+
+</head>
+<body >
+<div class="quiz-box" id="quiz">
+    <div class="quiz-header">
+        <h2 id="question">Вопросы</h2>
+        <ul>
+            <li>
+                <input type="radio" name="answer" id="a" class="answer">
+                <label for="a" id="a_text">Question</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="b" class="answer">
+                <label for="b" id="b_text">Question</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="c" class="answer">
+                <label for="c" id="c_text">Question</label>
+            </li>
+            <li>
+                <input type="radio" name="answer" id="d" class="answer">
+                <label for="d" id="d_text">Question</label>
+            </li>
+        </ul>
+    </div>
+    <button id="submit">Принять</button>
+    <div class="bottomButoons">
+        <div class="btn"> 
+         <button id ="ter">Теория</button>
+            
+        <button id="anim">Анимация</button>
+        </div>
+</div>
+
+<script>
+    
+    const quizData = [
+    {
+        question: "Как расшифровывается OSPF?",
+        a: "Протокол управления передачей",
+        b: "Протокол маршрутной информации",
+        c: "Сперва открытый короткий путь",
+        d: "Протокол пользовательских датаграмм",
+        correct: "c",
+    },
+    {
+        question: "OSPF использует алгоритм SPF для нахождения кратчайщего пути, на каком алгоритме он основан?",
+        a: "Алгоритм Флойда",
+        b: "Алгоритм Дейкстры",
+        c: "Алгоритм Флойда — Уоршелла",
+        d: "Алгоритм Форда — Беллмана",
+        correct: "b",
+    },
+    {
+        question: "Для каких сетей предназначен протокол OSPF",
+        a: "Предназначен для работы в больших гибких составных сетях, хранится информация только о непосредственно подключенных к нему подсетях и маршрутизаторах",
+        b: "Предназначен для работы в больших статических сетях, известна вся таблица MAC - адресов, поэтому он всегда может найти кратчаший путь",
+        c: "Предназначен для малых динмачиских сетей, хранится информация не только о подключенных к нему подсетях, но и об отключённых сетях (в буфере)",
+        d: "Предназначен для средних, одиночных, динамических сетей",
+        correct: "a",
+    },
+    {
+        question: "OSPF предлагает решение следующих задач. Уберите лишнее",
+        a: "Метод выбора пути",
+        b: "Поддержка сетевых масок переменной длины (Variable Length Subnet Masking, VLSM,)",
+        c: "Управлять перегрузками.",
+        d: "Динамическое перераспределение трафика между параллельными каналами, которое выполняется пропорционально степени загруженности этих каналов",
+        correct: "c",
+    },
+    {
+        question: "Преимущество протокола OSPF. Уберите лишнее",
+        a: "Отсутствуют ограничения на размер сети, используется иерархическая структура сети",
+        b: "Протокол поддерживает максимум 15 переходов. Сеть, включающая более 15 маршрутизаторов рассматривается как недоступная.",
+        c: "Обеспечивает несколько маршрутов в сторону одного узла",
+        d: "Обеспечивает передачу обновлений маршрутов с использованием адресов типа multicast и аутентификацию",
+        correct: "b",
+    },
+    {
+        question: "Особенности протокола OSPF. Уберите лишнее",
+        a: "Каждому каналу может быть присвоен свой вес (количество ретрансляций). Ограничение на количество ретрансляций — 65 535;",
+        b: "Каждый узел содержит базу сетевых путей в виде дерева, в вершине которого находится данный узел;",
+        c: "широковещательная рассылка таблиц маршрутизации производится только при появлении изменений;",
+        d: "Сети OSPF являются однородными. Понятие областей или границ отсутствует. С появлением бесклассовой маршрутизации и интеллектуального использования агрегирования и суммирования, сети OSPF морально устарели.",
+        correct: "d",
+    },
+    {
+        question: "При протоколе OSPF маршрутизаторы передают друг другу каждые 10 секунд короткие сообщения... Какие?",
+        a: "HELLO",
+        b: "hi",
+        c: "hellnow",
+        d: "01101000 01101001",
+        correct: "a",
+    },
+    {
+        question: "Каждый N промежуток времени все маршрутизаторы обмениваются всеми записями базы данных о топологии сети с целью синхронизации для более надежной работы. Чему равно N?",
+        a: "15 миллисекундам",
+        b: "30 секундам",
+        c: "30 минутам",
+        d: "10028 миллисекундам",
+        correct: "c",
+    },
+    {
+        question: "Метрика представляет собой оценку качества связи в данной сети. Метрика учитывает следующие параметры, уберите лишнее",
+        a: "пропускную способность канала, величину задержки распространения сигнала в канале",
+        b: "надежность канала, загруженность канала",
+        c: "Из чего состоит линия связи, предпочтения пользователя",
+        d: "размер максимального блока данных, который может быть передан через данный канал.",
+        correct: "c",
+    },
+    {
+        question: "Процесс построения таблиц маршрутизации 1 этап",
+        a: "Каждый маршрутизатор строит граф связей. Маршрутизаторы обмениваются со своими соседями сообщениями о состоянии связей а потом, не изменяя, передают. В результате все маршрутизаторы имеют одинаковые сведенья о сетевом графе.",
+        b: "Один маршрутизатор строит граф связей сети, ищет кратчайший путь, после чего передаёт остальным маршруритизаторам. В результате все маршрутизаторы имеют одинаковые сведенья о сетевом графе.",
+        c: "Каждый маршрутизатор отдельно строит граф связей относительно себя. Потом маршрутизаторы обмениваются со своими соседями построенными графами, после чего с помощью алгоритма строится единый граф связей.",
+        d: "Граф связей строит администратор сети",
+        correct: "a",
+    },
+    {
+        question: "Процесс построения таблиц маршрутизации 2 этап",
+        a: "Поиск оптимальных маршрутов с помощью алгоритма Флойда — Уоршелла. Один маршрутизатор находит все кратчайшие пути от него.",
+        b: "Поиск оптимальных маршрутов с помощью алгоритма Дейкстры. В каждом найденном маршруте запоминается несколько шагов — это записывается таблицу. Если у нескольких маршрутов одна и та же метрика — запоминаются все метрики маршрутов и записываются в таблицу.",
+        c: "Администратор сети заполняет таблицу маршрутизации, так как алгоритм всё ещё не может сравниться с качеством выполнения человека",
+        d: "Поиск оптимальных маршрутов с помощью алгоритма Дейкстры. В каждом найденном маршруте запоминается один шаг — к следующему маршрутизатору это записывается в таблицу. Если несколько маршрутов имеют одну и ту же метрику — запоминаются первые шаги этих маршрутов",
+        correct: "d",
+    },
+    {
+        question: "Пердположим существует два маршрута с метриками 1 и 2, две трети трафика будет направлено по первому, а треть — по второму, уберите лишний вариант ответа",
+        a: "Отказ одного из маршрутизаторов вызовет перемаршрутизацию лишь части трафика, что существенно сгладит нежелательные эффекты",
+        b: "От этого уменьшеньшиться среднея задержка прохождения дейтаграмм между отправителем и получателем",
+        c: "Позволяет отправлять одно сообщение в два потока, ускоряя его доставку",
+        d: "От этого уменьшеньшиться колебания значений средней задержки",
+        correct: "c",
+    },
+];
+
+const quiz = document.getElementById('quiz');
+const answerElements = document.querySelectorAll('.answer');
+const questionElement = document.getElementById('question');
+const a_text = document.getElementById('a_text');
+const b_text = document.getElementById('b_text');
+const c_text = document.getElementById('c_text');
+const d_text = document.getElementById('d_text');
+const submit = document.getElementById('submit');
+
+let currentQuiz = 0;
+let score = 0;
+
+loadQuiz();
+
+function loadQuiz(){
+    deselectAnswers();
+
+    const currentQuizData = quizData[currentQuiz];
+
+    questionElement.innerText = currentQuizData.question;
+    a_text.innerText = currentQuizData.a;
+    b_text.innerText = currentQuizData.b;
+    c_text.innerText = currentQuizData.c;
+    d_text.innerText = currentQuizData.d;
+}
+
+function deselectAnswers(){
+    answerElements.forEach(answerEl => answerEl.checked = false)
+}
+
+function getSelected(){
+    let answer;
+
+    answerElements.forEach(answerEl => {
+        if(answerEl.checked){
+            answer = answerEl.id;
+        }
+    });
+
+    return answer;
+}
+
+submit.addEventListener('click', () => {
+    const answer = getSelected();
+
+    if(answer){
+        if(answer === quizData[currentQuiz].correct){
+            score++;
+        }
+
+        currentQuiz++;
+
+        if(currentQuiz < quizData.length){
+            loadQuiz();
+        }
+        else{
+            quiz.innerHTML = `<h2>Вы правильно ответили на ${score}/${quizData.length} вопросов</h2>
+            <button onclick="location.reload()">Занаво</button>`;
+        }
+    }
+});
+ter.addEventListener('click', () => {
+    window.location.href = 'teoria.html';
+});
+
+anim.onclick=function(){if(!document.getElementById('img')){var image=document.createElement('img');image.id="img";image.src="https://cdn.discordapp.com/attachments/860822568806383647/977919318828396614/giffka.gif";document.body.appendChild(image)}
+else{
+    document.getElementById('img').remove();
+}}
+
+
+</script>
+
+    
+
+
+ <!-- Scripts -->
+ <!-- <script src="main.js"></script> -->
+</body>  
+
+
+
+
+</html>
+
